@@ -28,12 +28,13 @@ var mainPage = [{
 ];
 var timer;
 var startSecond = 30;
-var second = 10;
-var correctAnswers = 0;
-var incorrectAnswers = 0;
-var unanswered = 0;
+var second;
+var correctAnswers;
+var incorrectAnswers;
+var unanswered;
 function tick(){
     second--;
+   
     $("#timeR").text("count number: " + second);//html의 timeR이라는 id를 가지고 있는 엘레먼트를 찾아서 텍스트를 세컨드로 바꿔준다. 
     if(second === 0){
         allDone();
@@ -45,6 +46,9 @@ function preStart(){
     $("#timeR").html("<button style='width:70px; height: 50px;'>Start Game</button>");
     $("#question").html("");
     $("button").click(function(){
+        correctAnswers = 0;
+        incorrectAnswers = 0;
+        unanswered = 0;
         startTimer();
         startGame();
 
@@ -73,22 +77,21 @@ function startGame(){
         //html전체를 스트링으로 작성하고 html로 지정을 한다. 
 
         for(var j=0; j<mainPage[i].options.length; j++){
-            questionHtml += "<input type=\"radio\" name=\" " + "button_" + i + "\" " + "value=" + j + ">" + mainPage[i].options[j] + "</input>";
-            console.log(questionHtml);
-            }
-      
+            questionHtml += "<input type='radio' name='button_" + i + "' value="+ j + ">" + mainPage[i].options[j] + "</input>";
+            } 
         }
-        $("#question").html(questionHtml)
+        $("#question").html(questionHtml);
     }
 function allDone(){
     clearInterval(timer);//더이상 tick을 1초마다 부르지 않는다. 
-    
+    // $("#timeR").text("completed");
+    // $("#question").text("all done");
     for(var i=0; i < mainPage.length; i++){
        
         // var isAnswered = false;
-        // console.log(i + " = " + ($("input[name=\"button_"+i+"\"]:checked")==true));
+         console.log(i + " = " + ($("input[name=\"button_"+i+"\"]:checked")==true));
 
-        if($("input[name=button_"+i+"]").is(":checked")){
+         if($("input[name=button_"+i+"]").is(":checked")){
             // isAnswered = true;
             //name page 의 i 번째의 답과 같을때, 
             console.log(mainPage[i].answers);
@@ -109,7 +112,7 @@ function allDone(){
     $("#question").html("correct answeres: " + correctAnswers + "<br>" + "incorrect answeres: " + incorrectAnswers +"<br>" + "unanswered: " + unanswered);
     // console.log(unanswered+","+correctAnswers+","+incorrectAnswers);
     $("#button").click(function(){click()});
-}
+ }
 
 function click(){
   preStart();
