@@ -7,19 +7,19 @@
 //타이머가 0이 되면 페이지가 자동으로 넘어가고 결과값이 나타난다. 
 // 타이머가 0이 될 때 유저가 한 답들을 계산한다.  
 var mainPage = [{
-    question : "What was the first full length CGI movie?",
+    question : "1. What was the first full length CGI movie?",
     options : ["A Bug's Life", "Monsters Inc", "Toy Story", "The Lion King"],
     answers : ["2"]
 
 },
 {
-    question : "Which popular Disney movie featured the song, \"Circle of Life\" ?",
+    question : "2. Which popular Disney movie featured the song, \"Circle of Life\" ?",
     options : ["Aladdin", "The Lion King", "Mulan", "The Little Mermaid"],
     answers : ["1"]
 
 },
 {
-    question : "What colour is the brandy liquor called Chartreuse?",
+    question : "3. What colour is the brandy liquor called Chartreuse?",
     options : ["Blue","Green","Yellow","Brown"],
     answers : ["1","2"]
 
@@ -27,7 +27,7 @@ var mainPage = [{
 
 ];
 var timer;
-var startSecond = 30;
+var startSecond = 5;
 var second;
 var correctAnswers;
 var incorrectAnswers;
@@ -55,7 +55,6 @@ function preStart(){
     });
 }
 
-
 function startTimer(){
     second = startSecond;
     $("#timeR").text("count number: " + second);//설정값 표시(30초)
@@ -81,7 +80,21 @@ function startGame(){
             } 
         }
         $("#question").html(questionHtml);
+
+        var allClicked;
+        
+        var button = $("<button>");
+        button.text("submit");
+        // button.addClass("jsbutton");
+        //button.attr("id", "submit button");
+        button.on("click", function(){
+            allDone();
+        });
+        button.css({"margin-top": "20px", "padding": "10px"});
+        $("#question").append("<br>");  
+        $("#question").append(button);    
     }
+
 function allDone(){
     clearInterval(timer);//더이상 tick을 1초마다 부르지 않는다. 
     // $("#timeR").text("completed");
