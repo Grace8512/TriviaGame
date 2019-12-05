@@ -37,8 +37,8 @@ var questionsPage = [{
 
 
 var timer = {
-    startSecond: 10,
-    second: 10,
+    startSecond: 30,
+    second: 30,
     correctAnswers: 0,
     incorrectAnswers: 0,
     unAnswered: 0,
